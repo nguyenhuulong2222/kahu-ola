@@ -1,0 +1,16 @@
+﻿{
+  "@@locale": "en",
+  "profile_title": "Profile",
+  "family_info": "Family Information",
+  "fullName": "Full Name",
+  "address": "Address",
+  "memberCount": "Number of Family Members",
+  "survival_checklist": "Survival Checklist",
+  "save_button": "Save",
+  "water": "Water",
+  "dryFood": "Dry Food",
+  "flashlight": "Flashlight",
+  "radio": "Radio",
+  "documents": "Documents",
+  "people": "people"
+}

@@ -1,0 +1,16 @@
+﻿{
+  "@@locale": "vi",
+  "profile_title": "Hồ Sơ",
+  "family_info": "Thông Tin Gia Đình",
+  "fullName": "Họ và Tên",
+  "address": "Địa Chỉ",
+  "memberCount": "Số Thành Viên Gia Đình",
+  "survival_checklist": "Danh Sách Sinh Tồn",
+  "save_button": "Lưu",
+  "water": "Nước",
+  "dryFood": "Đồ khô",
+  "flashlight": "Đèn pin",
+  "radio": "Radio",
+  "documents": "Giấy tờ",
+  "people": "người"
+}
