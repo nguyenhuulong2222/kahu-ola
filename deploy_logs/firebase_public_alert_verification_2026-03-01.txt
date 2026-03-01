@@ -1,0 +1,19 @@
+Firebase Public Alert Verification
+Date: 2026-03-01
+Project: kahu-ola
+Function: sendPublicFireAlert
+
+Verification summary:
+- Cloud Function listing confirmed sendPublicFireAlert is ACTIVE in us-central1.
+- Simulated Firestore document created:
+  public_alert_dispatch/sim_maui_1772363863
+- Firestore verification after trigger:
+  status=sent
+  sentAt=2026-03-01T11:17:46.521Z
+- Cloud Function log confirmation:
+  2026-03-01T11:17:46.577382Z I sendpublicfirealert:
+  {"topics":["alerts_maui"],"alertId":"sim_maui_1772363863","hotspotCount":"1","message":"Public fire alert sent."}
+
+Operational note:
+- Internal Slack notification was posted to #fire-alerts for the simulation milestone.
+- Slack alert sound ("Boop Plus") is controlled by the Slack client/channel notification settings and is not verifiable via webhook response.
