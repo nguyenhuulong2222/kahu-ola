@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -18,6 +19,7 @@ class _MapTabState extends State<MapTab> {
   static const LatLng _mauiCountyCenter = LatLng(20.8400, -156.6600);
   static const double _fireAlertRadiusKm = 120;
   static const int _maxResolvedLocations = 3;
+  static const Duration _pollInterval = Duration(minutes: 1);
   static const Map<String, LatLng> _islandCenters = {
     'Maui': LatLng(20.7984, -156.3319),
     'Lanai': LatLng(20.8268, -156.9210),
@@ -34,10 +36,12 @@ class _MapTabState extends State<MapTab> {
   final Distance _distance = const Distance();
   final MapController _mapController = MapController();
 
+  Timer? _pollTimer;
   List<LatLng> _firePoints = const [];
   List<String> _fireLocations = const [];
   String? _lastSlackAlertSignature;
   bool _didAttemptSlackGreeting = false;
+  bool _isFetching = false;
   bool _isLoading = true;
   String? _errorMessage;
   DateTime? _lastUpdatedAt;
@@ -46,13 +50,20 @@ class _MapTabState extends State<MapTab> {
   void initState() {
     super.initState();
     _sendSlackStartupGreeting();
+    _startRealtimePolling();
     _fetchFireData();
   }
 
   @override
   void dispose() {
+    _pollTimer?.cancel();
     _dio.close(force: true);
     super.dispose();
+  }
+
+  void _startRealtimePolling() {
+    _pollTimer?.cancel();
+    _pollTimer = Timer.periodic(_pollInterval, (_) => _fetchFireData());
   }
 
   String get _nasaFirmsUrl {
@@ -66,7 +77,9 @@ class _MapTabState extends State<MapTab> {
   }
 
   Future<void> _fetchFireData() async {
-    if (!mounted) return;
+    if (!mounted || _isFetching) return;
+
+    _isFetching = true;
 
     setState(() {
       _isLoading = true;
@@ -112,6 +125,8 @@ class _MapTabState extends State<MapTab> {
         _errorMessage = 'An unexpected error occurred while loading fire data.';
         _lastUpdatedAt = DateTime.now();
       });
+    } finally {
+      _isFetching = false;
     }
   }
 
@@ -122,7 +137,8 @@ class _MapTabState extends State<MapTab> {
 
     _didAttemptSlackGreeting = true;
     await _postSlackMessage(
-      '🚀 Kahu Ola Fire Surveillance is LIVE for Maui, Lanai, and Molokai. Monitoring 120km radius.',
+      '\u{1F6A8} KAHU OLA ALERT: Satellite monitoring for Maui, Lanai, and '
+      'Molokai is ACTIVE. Sound test successful.',
       channel: AppConstants.slackAlertsChannel,
     );
   }
@@ -173,7 +189,8 @@ class _MapTabState extends State<MapTab> {
           responseType: ResponseType.plain,
         ),
       );
-      return response.statusCode != null && response.statusCode! >= 200 &&
+      return response.statusCode != null &&
+          response.statusCode! >= 200 &&
           response.statusCode! < 300;
     } on DioException {
       return false;
