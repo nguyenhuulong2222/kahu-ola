@@ -36,6 +36,8 @@ class _MapTabState extends State<MapTab> {
 
   List<LatLng> _firePoints = const [];
   List<String> _fireLocations = const [];
+  String? _lastSlackAlertSignature;
+  bool _didAttemptSlackGreeting = false;
   bool _isLoading = true;
   String? _errorMessage;
   DateTime? _lastUpdatedAt;
@@ -43,6 +45,7 @@ class _MapTabState extends State<MapTab> {
   @override
   void initState() {
     super.initState();
+    _sendSlackStartupGreeting();
     _fetchFireData();
   }
 
@@ -89,6 +92,7 @@ class _MapTabState extends State<MapTab> {
         _isLoading = false;
         _lastUpdatedAt = DateTime.now();
       });
+      _maybeSendSlackHotspotAlert(points, fireLocations);
     } on DioException {
       if (!mounted) return;
       setState(() {
@@ -108,6 +112,71 @@ class _MapTabState extends State<MapTab> {
         _errorMessage = 'An unexpected error occurred while loading fire data.';
         _lastUpdatedAt = DateTime.now();
       });
+    }
+  }
+
+  Future<void> _sendSlackStartupGreeting() async {
+    if (_didAttemptSlackGreeting || AppConstants.slackWebhookUrl.isEmpty) {
+      return;
+    }
+
+    _didAttemptSlackGreeting = true;
+    await _postSlackMessage(
+      '🚀 Kahu Ola Fire Surveillance is LIVE for Maui, Lanai, and Molokai. Monitoring 120km radius.',
+      channel: AppConstants.slackAlertsChannel,
+    );
+  }
+
+  Future<void> _maybeSendSlackHotspotAlert(
+    List<LatLng> points,
+    List<String> fireLocations,
+  ) async {
+    if (AppConstants.slackWebhookUrl.isEmpty || points.isEmpty) return;
+
+    final alertLocations = fireLocations.isEmpty
+        ? points.take(_maxResolvedLocations).map(_fallbackLocationLabel).toList()
+        : fireLocations;
+    final alertSignature = '${points.length}|${alertLocations.join('|')}';
+    if (alertSignature == _lastSlackAlertSignature) return;
+
+    final message = StringBuffer()
+      ..writeln('ACTIVE FIRE ALERT - MAUI COUNTY')
+      ..writeln('Detected hotspots: ${points.length}.')
+      ..write('Impacted islands and areas: ${alertLocations.join(', ')}');
+
+    final didSend = await _postSlackMessage(
+      message.toString(),
+      channel: AppConstants.slackAlertsChannel,
+    );
+    if (didSend) {
+      _lastSlackAlertSignature = alertSignature;
+    }
+  }
+
+  Future<bool> _postSlackMessage(
+    String text, {
+    String? channel,
+  }) async {
+    if (AppConstants.slackWebhookUrl.isEmpty) return false;
+
+    try {
+      final payload = <String, dynamic>{'text': text};
+      if (channel != null && channel.isNotEmpty) {
+        payload['channel'] = channel;
+      }
+
+      final response = await _dio.post<String>(
+        AppConstants.slackWebhookUrl,
+        data: payload,
+        options: Options(
+          contentType: Headers.jsonContentType,
+          responseType: ResponseType.plain,
+        ),
+      );
+      return response.statusCode != null && response.statusCode! >= 200 &&
+          response.statusCode! < 300;
+    } on DioException {
+      return false;
     }
   }
 

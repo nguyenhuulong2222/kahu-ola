@@ -9,6 +9,10 @@ class AppConstants {
   static const String appVersion = '1.0.0';
   static const String mapboxToken = 'pk.eyJ1Ijoibmd1eWVuaHV1bG9uZzIyIiwiYSI6ImNtbTY1dWg5NTBlNWYycXEyNWhrenRpdXcifQ.vs9tPANwLMzrrwO0NdLctQ'; // Thay bằng Key thật của bạn
   static const String mapboxStyle = 'mapbox/satellite-streets-v12';
+  static const String slackWebhookUrl =
+      String.fromEnvironment('SLACK_WEBHOOK_URL', defaultValue: '');
+  static const String slackAlertsChannel =
+      String.fromEnvironment('SLACK_ALERTS_CHANNEL', defaultValue: '#fire-alerts');
   // Organisation
   static const String orgName = 'Kahu Ola Civic Tech';
   static const String founder = 'Long Nguyen';
