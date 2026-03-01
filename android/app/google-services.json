@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "609159204886",
+    "project_id": "kahu-ola",
+    "storage_bucket": "kahu-ola.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609159204886:android:b7d2996813cb3b8a2ca537",
+        "android_client_info": {
+          "package_name": "com.kahuola.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBumOqrr0DgGeZnZPoaZEM31NOcgLgZOgo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,6 +5,7 @@ import '../widgets/home_tab.dart';
 import '../widgets/map_tab.dart';
 import '../widgets/profile_tab.dart';
 import '../widgets/resources_tab.dart';
+import '../../../settings/presentation/pages/settings_page.dart';
 
 /// Main Dashboard with M3 NavigationBar (4 tabs)
 /// Tabs: Home (Alerts) | Map | Profile | Resources
@@ -59,7 +60,13 @@ class _DashboardPageState extends State<DashboardPage> {
                 IconButton(
                   icon: const Icon(Icons.tune_rounded),
                   tooltip: 'Settings',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => const SettingsPage(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

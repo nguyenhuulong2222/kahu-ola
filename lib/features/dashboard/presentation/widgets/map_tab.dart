@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:kahu_ola/core/constants/app_constants.dart';
+import 'package:kahu_ola/core/services/public_alert_dispatch_service.dart';
 import 'package:latlong2/latlong.dart';
 
 class MapTab extends StatefulWidget {
@@ -39,6 +40,7 @@ class _MapTabState extends State<MapTab> {
   Timer? _pollTimer;
   List<LatLng> _firePoints = const [];
   List<String> _fireLocations = const [];
+  String? _lastPublicAlertSignature;
   String? _lastSlackAlertSignature;
   bool _didAttemptSlackGreeting = false;
   bool _isFetching = false;
@@ -105,6 +107,7 @@ class _MapTabState extends State<MapTab> {
         _isLoading = false;
         _lastUpdatedAt = DateTime.now();
       });
+      _maybePublishPublicAlert(points, fireLocations);
       _maybeSendSlackHotspotAlert(points, fireLocations);
     } on DioException {
       if (!mounted) return;
@@ -166,6 +169,34 @@ class _MapTabState extends State<MapTab> {
     );
     if (didSend) {
       _lastSlackAlertSignature = alertSignature;
+    }
+  }
+
+  Future<void> _maybePublishPublicAlert(
+    List<LatLng> points,
+    List<String> fireLocations,
+  ) async {
+    if (points.isEmpty) return;
+
+    final impactedIslands = _identifyImpactedIslands(points);
+    if (impactedIslands.isEmpty) return;
+
+    final alertLocations = fireLocations.isEmpty
+        ? points.take(_maxResolvedLocations).map(_fallbackLocationLabel).toList()
+        : fireLocations;
+    final alertSignature =
+        '${impactedIslands.toList()..sort()}|${points.length}|${alertLocations.join('|')}';
+    if (alertSignature == _lastPublicAlertSignature) return;
+
+    try {
+      await PublicAlertDispatchService.publishHotspotAlert(
+        islands: impactedIslands,
+        locations: alertLocations,
+        hotspotCount: points.length,
+      );
+      _lastPublicAlertSignature = alertSignature;
+    } catch (_) {
+      // Keep map polling responsive even if public alert dispatch fails.
     }
   }
 
@@ -286,6 +317,10 @@ class _MapTabState extends State<MapTab> {
     }
 
     return nearestIsland;
+  }
+
+  Set<String> _identifyImpactedIslands(List<LatLng> points) {
+    return points.map(_nearestIsland).toSet();
   }
 
   String _fallbackLocationLabel(LatLng point) {
