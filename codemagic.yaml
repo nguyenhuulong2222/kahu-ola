@@ -9,14 +9,70 @@ workflows:
     scripts:
       - name: Resolve iOS build metadata
         script: |
-          export IOS_BUILD_NAME="${IOS_BUILD_NAME:-1.0.0}"
-          export IOS_BUILD_NUMBER="${PROJECT_BUILD_NUMBER:-${BUILD_NUMBER:-10}}"
+          IOS_BUILD_NAME="${IOS_BUILD_NAME:-1.0.0}"
+          IOS_BUILD_NUMBER="${PROJECT_BUILD_NUMBER:-${BUILD_NUMBER:-10}}"
+
+          case "${IOS_BUILD_NUMBER}" in
+            ''|*[!0-9]*)
+              IOS_BUILD_NUMBER=10
+              ;;
+          esac
+
+          if [ "${IOS_BUILD_NUMBER}" -le 1 ]; then
+            IOS_BUILD_NUMBER=10
+          fi
+
+          export IOS_BUILD_NAME
+          export IOS_BUILD_NUMBER
           echo "Resolved IOS_BUILD_NAME=${IOS_BUILD_NAME}"
           echo "Resolved IOS_BUILD_NUMBER=${IOS_BUILD_NUMBER}"
+          if [ -n "${CM_ENV:-}" ]; then
+            {
+              echo "IOS_BUILD_NAME=${IOS_BUILD_NAME}"
+              echo "IOS_BUILD_NUMBER=${IOS_BUILD_NUMBER}"
+            } >> "${CM_ENV}"
+          fi
+      - name: Verify iOS bundle metadata
+        script: |
+          APP_DIR="mobile"
+          IOS_DIR="${APP_DIR}/ios"
+          if [ ! -f "${APP_DIR}/pubspec.yaml" ] && [ -f "pubspec.yaml" ] && [ -d "ios" ]; then
+            APP_DIR="."
+            IOS_DIR="ios"
+            echo "mobile/pubspec.yaml not found; inspecting repo-root Flutter app."
+          fi
+
+          PUBSPEC_PATH="${APP_DIR}/pubspec.yaml"
+          SOURCE_INFO_PLIST="${IOS_DIR}/Runner/Info.plist"
+          PUBSPEC_VERSION="$(grep -E '^version:' "${PUBSPEC_PATH}" 2>/dev/null | head -n 1 | awk '{print $2}' | tr -d '\r' || true)"
+
+          echo "pubspec version: ${PUBSPEC_VERSION:-unavailable}"
+          echo "FLUTTER_BUILD_NAME: ${FLUTTER_BUILD_NAME:-unset}"
+          echo "FLUTTER_BUILD_NUMBER: ${FLUTTER_BUILD_NUMBER:-unset}"
+          echo "IOS_BUILD_NAME: ${IOS_BUILD_NAME:-unset}"
+          echo "IOS_BUILD_NUMBER: ${IOS_BUILD_NUMBER:-unset}"
+
+          if [ -f "${SOURCE_INFO_PLIST}" ] && command -v /usr/libexec/PlistBuddy >/dev/null 2>&1; then
+            echo "Source Info.plist CFBundleShortVersionString: $(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "${SOURCE_INFO_PLIST}" 2>/dev/null || echo unavailable)"
+            echo "Source Info.plist CFBundleVersion: $(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "${SOURCE_INFO_PLIST}" 2>/dev/null || echo unavailable)"
+          else
+            echo "Source Info.plist inspection skipped."
+          fi
       - name: Build iOS IPA
         script: |
           export IOS_BUILD_NAME="${IOS_BUILD_NAME:-1.0.0}"
-          export IOS_BUILD_NUMBER="${PROJECT_BUILD_NUMBER:-${BUILD_NUMBER:-10}}"
+          export IOS_BUILD_NUMBER="${IOS_BUILD_NUMBER:-${PROJECT_BUILD_NUMBER:-${BUILD_NUMBER:-10}}}"
+
+          case "${IOS_BUILD_NUMBER}" in
+            ''|*[!0-9]*)
+              export IOS_BUILD_NUMBER=10
+              ;;
+          esac
+
+          if [ "${IOS_BUILD_NUMBER}" -le 1 ]; then
+            export IOS_BUILD_NUMBER=10
+          fi
+
           bash mobile/ci/ios_build.sh
     artifacts:
       - build/ios/ipa/*.ipa

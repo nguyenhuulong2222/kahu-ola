@@ -6,9 +6,11 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DEFAULT_APP_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 APP_DIR="${DEFAULT_APP_DIR}"
+APP_DIR_FALLBACK=0
 
 if [[ ! -f "${APP_DIR}/pubspec.yaml" && -f "${REPO_ROOT}/pubspec.yaml" && -d "${REPO_ROOT}/ios" ]]; then
   APP_DIR="${REPO_ROOT}"
+  APP_DIR_FALLBACK=1
 fi
 
 LOG_DIR="${APP_DIR}/build_logs"
@@ -19,6 +21,43 @@ mkdir -p "${LOG_DIR}"
 
 log() {
   printf '[ios-build] %s\n' "$*" | tee -a "${LOG_FILE}"
+}
+
+log_generated_flutter_values() {
+  local label="$1"
+
+  if [[ -f "${GENERATED_XCCONFIG_PATH}" ]]; then
+    local xc_build_name xc_build_number
+    xc_build_name="$(grep -E '^FLUTTER_BUILD_NAME=' "${GENERATED_XCCONFIG_PATH}" | head -n 1 | cut -d '=' -f 2- | tr -d '\r' || true)"
+    xc_build_number="$(grep -E '^FLUTTER_BUILD_NUMBER=' "${GENERATED_XCCONFIG_PATH}" | head -n 1 | cut -d '=' -f 2- | tr -d '\r' || true)"
+    log "${label} Generated.xcconfig FLUTTER_BUILD_NAME: ${xc_build_name:-unset}"
+    log "${label} Generated.xcconfig FLUTTER_BUILD_NUMBER: ${xc_build_number:-unset}"
+  else
+    log "${label} Generated.xcconfig inspection skipped (missing ${GENERATED_XCCONFIG_PATH})."
+  fi
+}
+
+log_metadata_snapshot() {
+  local label="$1"
+  local plist_path="$2"
+
+  log "${label} pubspec version: ${PUBSPEC_VERSION:-unknown}"
+  log "${label} env FLUTTER_BUILD_NAME: ${FLUTTER_BUILD_NAME:-unset}"
+  log "${label} env FLUTTER_BUILD_NUMBER: ${FLUTTER_BUILD_NUMBER:-unset}"
+  log "${label} resolved build name: ${RESOLVED_BUILD_NAME:-unset}"
+  log "${label} resolved build number: ${RESOLVED_BUILD_NUMBER:-unset}"
+
+  if [[ -f "${plist_path}" ]] && command -v /usr/libexec/PlistBuddy >/dev/null 2>&1; then
+    local bundle_id version build
+    bundle_id="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "${plist_path}" 2>/dev/null || true)"
+    version="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "${plist_path}" 2>/dev/null || true)"
+    build="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "${plist_path}" 2>/dev/null || true)"
+    log "${label} Info.plist path: ${plist_path}"
+    log "${label} Info.plist bundle id: ${bundle_id:-unknown}"
+    log "${label} Info.plist version: ${version:-unknown} (${build:-unknown})"
+  else
+    log "${label} Info.plist inspection skipped (PlistBuddy unavailable or ${plist_path} missing)."
+  fi
 }
 
 fail() {
@@ -63,6 +102,8 @@ IOS_DIR="${DEFAULT_IOS_DIR}"
 if [[ ! -d "${IOS_DIR}" && -d "${REPO_ROOT}/ios" ]]; then
   IOS_DIR="${REPO_ROOT}/ios"
 fi
+SOURCE_INFO_PLIST_PATH="${IOS_DIR}/Runner/Info.plist"
+GENERATED_XCCONFIG_PATH="${IOS_DIR}/Flutter/Generated.xcconfig"
 
 HAS_PODFILE=0
 if [[ -f "${IOS_DIR}/Podfile" ]]; then
@@ -141,17 +182,14 @@ if [[ -f "${IOS_DIR}/Runner/GoogleService-Info.plist" ]]; then
 fi
 
 log "App directory: ${APP_DIR}"
+if [[ "${APP_DIR_FALLBACK}" == "1" ]]; then
+  log "mobile/pubspec.yaml is missing; falling back to the repo-root Flutter app."
+fi
 log "Pubspec version: ${PUBSPEC_VERSION}"
 log "Resolved FLUTTER_BUILD_NAME: ${RESOLVED_BUILD_NAME}"
 log "Resolved FLUTTER_BUILD_NUMBER: ${RESOLVED_BUILD_NUMBER}"
-
-GENERATED_XCCONFIG_PATH="${IOS_DIR}/Flutter/Generated.xcconfig"
-if [[ -f "${GENERATED_XCCONFIG_PATH}" ]]; then
-  XC_BUILD_NAME="$(grep -E '^FLUTTER_BUILD_NAME=' "${GENERATED_XCCONFIG_PATH}" | head -n 1 | cut -d '=' -f 2- | tr -d '\r' || true)"
-  XC_BUILD_NUMBER="$(grep -E '^FLUTTER_BUILD_NUMBER=' "${GENERATED_XCCONFIG_PATH}" | head -n 1 | cut -d '=' -f 2- | tr -d '\r' || true)"
-  log "Generated.xcconfig FLUTTER_BUILD_NAME: ${XC_BUILD_NAME:-unset}"
-  log "Generated.xcconfig FLUTTER_BUILD_NUMBER: ${XC_BUILD_NUMBER:-unset}"
-fi
+log_metadata_snapshot "Pre-build" "${SOURCE_INFO_PLIST_PATH}"
+log_generated_flutter_values "Pre-build"
 
 if [[ "${FORCE_CLEAN}" == "1" ]]; then
   log "Running flutter clean because FORCE_FLUTTER_CLEAN=1"
@@ -238,7 +276,6 @@ else
   log "IPA generated successfully: ${IPA_PATH}"
 fi
 
-SOURCE_INFO_PLIST_PATH="${IOS_DIR}/Runner/Info.plist"
 EFFECTIVE_INFO_PLIST_PATH="${SOURCE_INFO_PLIST_PATH}"
 if [[ "${IOS_NO_CODESIGN_VALUE}" == "1" && -f "${APP_DIR}/build/ios/iphoneos/Runner.app/Info.plist" ]]; then
   EFFECTIVE_INFO_PLIST_PATH="${APP_DIR}/build/ios/iphoneos/Runner.app/Info.plist"
@@ -246,15 +283,7 @@ elif [[ -f "${APP_DIR}/build/ios/archive/Runner.xcarchive/Products/Applications/
   EFFECTIVE_INFO_PLIST_PATH="${APP_DIR}/build/ios/archive/Runner.xcarchive/Products/Applications/Runner.app/Info.plist"
 fi
 
-if [[ -f "${EFFECTIVE_INFO_PLIST_PATH}" ]] && command -v /usr/libexec/PlistBuddy >/dev/null 2>&1; then
-  BUNDLE_ID="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "${EFFECTIVE_INFO_PLIST_PATH}" 2>/dev/null || true)"
-  VERSION="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "${EFFECTIVE_INFO_PLIST_PATH}" 2>/dev/null || true)"
-  BUILD="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "${EFFECTIVE_INFO_PLIST_PATH}" 2>/dev/null || true)"
-  log "Effective Info.plist path: ${EFFECTIVE_INFO_PLIST_PATH}"
-  log "Effective Info.plist bundle id: ${BUNDLE_ID:-unknown}"
-  log "Effective Info.plist version: ${VERSION:-unknown} (${BUILD:-unknown})"
-else
-  log "Info.plist validation skipped (no readable Info.plist or PlistBuddy unavailable)."
-fi
+log_generated_flutter_values "Post-build"
+log_metadata_snapshot "Post-build" "${EFFECTIVE_INFO_PLIST_PATH}"
 
 log "iOS build completed successfully. Full log: ${LOG_FILE}"
