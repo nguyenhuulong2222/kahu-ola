@@ -1,18 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Support - Kahu Ola</title>
-  <meta name="description" content="Support and compliance help for Kahu Ola.">
-  <meta name="theme-color" content="#0B1220">
+  <title>Support | Kahu Ola</title>
+  <meta name="description" content="Support and app review guidance for Kahu Ola.">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
   <div class="site-shell">
     <header class="site-header">
       <div class="container">
-        <nav class="site-nav" aria-label="Support">
+        <nav class="site-nav" aria-label="Primary">
           <a class="brand" href="./index.html">
             <span class="brand-mark" aria-hidden="true">KO</span>
             <span class="brand-copy">
@@ -20,78 +19,87 @@
               <span>Guardian of Life</span>
             </span>
           </a>
-          <div class="document-actions">
-            <a class="md-button md-button--outlined" href="./index.html">Back to Home</a>
-          </div>
+          <ul class="nav-links">
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./privacy.html">Privacy</a></li>
+            <li><a href="./support.html">Support</a></li>
+          </ul>
         </nav>
       </div>
     </header>
 
     <main class="document-layout">
       <div class="container">
-        <section class="document-intro document-card">
+        <section class="document-intro panel">
           <p class="eyebrow">Support</p>
-          <h1>Support for Kahu Ola</h1>
-          <p>This page provides a direct, professional support route for users, reviewers, and compliance stakeholders. Kahu Ola is a civic-tech project for Maui; it is not an emergency dispatch service and should not replace official instructions.</p>
-          <p><strong>Support email:</strong> <a href="mailto:long@kahuola.org">long@kahuola.org</a></p>
+          <h1>Support and review guidance</h1>
+          <p>
+            Kahu Ola provides calm, direct support for users, testers, and app-review teams. For assistance, contact <a href="mailto:long@kahuola.org">long@kahuola.org</a>.
+          </p>
           <div class="document-meta">
-            <span class="meta-chip">Root URL: https://kahuola.org/support.html</span>
-            <span class="meta-chip">Privacy URL: https://kahuola.org/privacy.html</span>
+            <span class="meta-chip">Primary contact: long@kahuola.org</span>
+            <span class="meta-chip">Maui civic-tech focus</span>
+          </div>
+          <div class="doc-actions section-gap">
+            <a class="md-button md-button--outlined" href="./index.html">Back to Home</a>
+            <a class="md-button md-button--tonal" href="./privacy.html">Privacy</a>
           </div>
         </section>
 
-        <section class="document-grid section-gap">
-          <article class="document-card">
+        <div class="policy-stack">
+          <section class="doc-card">
             <h2>How to get help</h2>
-            <p>If you need product support, contact <a href="mailto:long@kahuola.org">long@kahuola.org</a>. Include your device type, the module involved, and a short description of what you expected versus what happened.</p>
-            <div class="support-actions">
-              <a class="md-button md-button--filled" href="mailto:long@kahuola.org">Email Support</a>
-              <a class="md-button md-button--outlined" href="./privacy.html">View Privacy Policy</a>
-            </div>
-          </article>
+            <p>
+              Send support, compliance, or operational questions to <a href="mailto:long@kahuola.org">long@kahuola.org</a>. Include the page or feature involved, what you expected to happen, and what you observed instead.
+            </p>
+          </section>
 
-          <article class="document-card">
-            <h2>Edge Processing &amp; Privacy summary</h2>
-            <p>Location data is processed via Edge Computing on the user&rsquo;s device (on-device) or an equivalent edge path; we do not store raw precise location on our servers by default.</p>
-            <p>This means Kahu Ola is designed to evaluate location context locally for safety features rather than retaining a default server-side history of precise user movement.</p>
-          </article>
-        </section>
-
-        <section class="policy-body">
-          <article class="document-card">
-            <h2>FAQ</h2>
+          <section class="doc-card">
+            <h2>FAQs</h2>
             <div class="faq-list">
               <div class="faq-item">
-                <h3>Alerts</h3>
-                <p>Kahu Ola is designed to clarify public information, not replace official emergency alerts. If alerts feel delayed or incomplete, always check direct guidance from authorized local agencies.</p>
+                <h3>How do alerts work today?</h3>
+                <p>Current public pages present the production portal and roadmap. Interactive module actions are intentionally marked as coming soon while the safety workflows continue through staged implementation.</p>
               </div>
               <div class="faq-item">
-                <h3>Modules</h3>
-                <p>The module grid on the landing page shows the planned production surface for sixteen tools. Buttons are intentionally disabled and labeled as coming soon so the portal stays honest about current availability.</p>
+                <h3>Why are the module buttons disabled?</h3>
+                <p>The buttons show planned capability placement without implying that the live feature is already available. This avoids misleading users and keeps the portal review-friendly.</p>
               </div>
               <div class="faq-item">
-                <h3>Permissions</h3>
-                <p>If you grant location permission in a related app experience, Kahu Ola uses that context for safety relevance only. The default privacy posture is on-device Edge Computing, not background storage of raw precise coordinates on servers.</p>
+                <h3>What permissions should users expect?</h3>
+                <p>Location access should only be requested when needed for a specific safety function. The intended model is minimal, contextual access rather than continuous background collection.</p>
               </div>
             </div>
-          </article>
+          </section>
 
-          <article class="document-card">
+          <section class="doc-card">
             <h2>Troubleshooting checklist</h2>
             <ul>
-              <li>Confirm you are loading the production URLs directly from <code>https://kahuola.org/</code>.</li>
-              <li>Refresh the page if the latest layout or styles do not appear immediately after a deploy.</li>
-              <li>Check that CSS is loading from <code>./styles.css</code> and not from an outdated cached copy.</li>
-              <li>Verify that you are opening the root privacy and support pages, not older nested pages.</li>
-              <li>When reporting an issue, include screenshots and the page URL you visited.</li>
+              <li>Refresh the page to ensure the latest static build is loaded from GitHub Pages.</li>
+              <li>Confirm that your browser is not blocking styles and that <code>./styles.css</code> loads successfully.</li>
+              <li>Check that you are opening the root production URLs, not an older subfolder path.</li>
+              <li>If a module is marked coming soon, treat that as expected current behavior.</li>
+              <li>For urgent incidents, rely on official local emergency direction first.</li>
             </ul>
-          </article>
+          </section>
 
-          <article class="document-card">
-            <h2>Compliance note</h2>
-            <p>Apple reviewers and compliance stakeholders can use this support page together with the privacy policy to verify Kahu Ola&rsquo;s contact path, on-device Edge Processing language, and independent civic-tech posture for Maui.</p>
-          </article>
-        </section>
+          <section class="doc-card">
+            <h2>Permissions guidance</h2>
+            <p>
+              Kahu Ola is designed to request the least access necessary for a specific feature. If location-related functionality is introduced, users should grant permission only when the feature is actively needed and should review device settings if behavior appears inconsistent.
+            </p>
+          </section>
+
+          <section class="doc-card">
+            <h2>Privacy reminder</h2>
+            <p>
+              Location data is processed via Edge Computing on the user’s device (on-device) or an equivalent edge path; we do not store raw precise location on our servers by default.
+            </p>
+            <p>
+              This privacy-first model is intended to support safety use cases while reducing centralized exposure of sensitive location information.
+            </p>
+          </section>
+        </div>
       </div>
     </main>
 
