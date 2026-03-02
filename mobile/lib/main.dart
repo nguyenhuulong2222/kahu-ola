@@ -46,7 +46,14 @@ class MauiApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Maui Alert Buddy',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true),
+      builder: (context, child) {
+        return child ??
+            const LoadingScreen(
+              message: 'Rendering the app shell...',
+            );
+      },
       home: AppShell(
         builder: (context, _) => const AlertBuddyPage(),
       ),
