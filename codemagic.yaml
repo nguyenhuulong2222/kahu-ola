@@ -1,0 +1,25 @@
+workflows:
+  ios-release:
+    name: iOS Release
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - name: Resolve iOS build metadata
+        script: |
+          export IOS_BUILD_NAME="${IOS_BUILD_NAME:-1.0.0}"
+          export IOS_BUILD_NUMBER="${PROJECT_BUILD_NUMBER:-${BUILD_NUMBER:-10}}"
+          echo "Resolved IOS_BUILD_NAME=${IOS_BUILD_NAME}"
+          echo "Resolved IOS_BUILD_NUMBER=${IOS_BUILD_NUMBER}"
+      - name: Build iOS IPA
+        script: |
+          export IOS_BUILD_NAME="${IOS_BUILD_NAME:-1.0.0}"
+          export IOS_BUILD_NUMBER="${PROJECT_BUILD_NUMBER:-${BUILD_NUMBER:-10}}"
+          bash mobile/ci/ios_build.sh
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - mobile/build/ios/ipa/*.ipa
+      - build_logs/*.log
+      - mobile/build_logs/*.log
