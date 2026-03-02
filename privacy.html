@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Privacy | Kahu Ola</title>
-  <meta name="description" content="Privacy and legal compliance information for Kahu Ola.">
+  <title>Privacy Policy &amp; Legal Compliance | Kahu Ola</title>
+  <meta name="description" content="Privacy Policy and Legal Compliance information for Kahu Ola.">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -19,120 +19,118 @@
               <span>Guardian of Life</span>
             </span>
           </a>
-          <ul class="nav-links">
-            <li><a href="./index.html">Home</a></li>
-            <li><a href="./privacy.html">Privacy</a></li>
-            <li><a href="./support.html">Support</a></li>
-          </ul>
+          <div class="nav-stack">
+            <ul class="nav-links">
+              <li><a href="./index.html">Home</a></li>
+            </ul>
+            <ul class="nav-utilities">
+              <li><a href="./privacy.html" aria-current="page">Privacy</a></li>
+              <li><a href="./support.html">Support</a></li>
+            </ul>
+          </div>
         </nav>
       </div>
     </header>
 
-    <main class="document-layout">
-      <div class="container">
-        <section class="document-intro panel">
-          <p class="eyebrow">Privacy Policy</p>
-          <h1>Privacy and legal compliance</h1>
-          <p>
-            This page summarizes the privacy posture for Kahu Ola in plain English and review-ready language. It is structured for users, partners, and app-review auditors who need clear statements about location handling and data minimization.
+    <main class="document-shell">
+      <div class="container document-grid">
+        <section class="document-hero glass">
+          <p class="section-label">Privacy Policy</p>
+          <h1 class="document-title">Privacy Policy &amp; Legal Compliance for Kahu Ola</h1>
+          <p class="lead">
+            This page presents Kahu Ola’s privacy-by-design posture using review-ready language for users, partners, and app-review teams.
           </p>
-          <div class="document-callout">
+          <div class="callout">
             Location data is processed via Edge Computing on the user’s device (on-device) or an equivalent edge path; we do not store raw precise location on our servers by default.
           </div>
-          <div class="document-meta">
-            <span class="meta-chip">Last updated: March 2, 2026</span>
-            <span class="meta-chip">Contact: long@kahuola.org</span>
+          <div class="meta-row document-meta">
+            <span class="chip">Last updated: March 2, 2026</span>
+            <span class="chip">Contact: long@kahuola.org</span>
           </div>
-          <div class="doc-actions section-gap">
-            <a class="md-button md-button--outlined" href="./index.html">Back to Home</a>
-            <a class="md-button md-button--tonal" href="./support.html">Support</a>
+          <div class="doc-actions">
+            <a class="button button--secondary" href="./index.html">Back to Home</a>
+            <a class="button button--ghost" href="./support.html">Support</a>
           </div>
         </section>
 
         <div class="policy-stack">
-          <section class="doc-card">
-            <h2>Overview</h2>
-            <p>
-              Kahu Ola follows a privacy-by-design approach intended to support safety use cases without creating unnecessary exposure. The platform is structured to minimize the collection of personal data, reduce retention, and keep precise location handling as close to the user as possible.
-            </p>
-          </section>
-
-          <section class="doc-card">
-            <h2>Data We Collect</h2>
-            <p>
-              Kahu Ola is designed to operate with minimal personal information. Depending on the feature, the service may process user-provided inputs such as approximate location context, module requests, and support inquiries sent by email.
-            </p>
+          <section class="policy-block">
+            <h2>1. Data Minimalism &amp; Edge Computing (Apple Privacy by Design Standard)</h2>
+            <p>Kahu Ola operates under a strict Privacy by Design philosophy.</p>
+            <h3>On-Device Edge Processing</h3>
+            <p>All user location data used to calculate distance to wildfire activity (including NASA FIRMS data) or nearby shelters (including FEMA and local sources) is processed directly on the user’s device through On-Device Edge Computing.</p>
+            <p>Location coordinates are evaluated locally to enable safety-related modules such as:</p>
             <ul>
-              <li>Approximate or user-authorized location inputs needed for safety features.</li>
-              <li>Module interaction context required to render the relevant safety workflow.</li>
-              <li>Support communications voluntarily sent to <a href="mailto:long@kahuola.org">long@kahuola.org</a>.</li>
+              <li>Fire proximity alerts</li>
+              <li>Shelter recommendations</li>
+              <li>Evacuation routing modules</li>
             </ul>
+            <p>Kahu Ola does not require continuous background storage of user location on external servers to operate these features.</p>
+            <h3>Data Storage Policy</h3>
+            <p>Kahu Ola does not store or retain historical precise location data on centralized servers.</p>
+            <p>User coordinates are used in real-time only for the activation and operation of safety modules. Once processed, no persistent location log is created or maintained by Kahu Ola servers by default.</p>
+            <p>We practice data minimization and only process the minimum information necessary to deliver safety functionality.</p>
           </section>
 
-          <section class="doc-card">
-            <h2>On-Device/Edge Processing</h2>
-            <p>
-              Location-sensitive features are designed so distance and proximity logic can be evaluated on the user device or an equivalent edge path. This approach is intended to support fire proximity, shelter lookup, routing, and related civic-safety functions while reducing centralized storage risk.
-            </p>
-            <p>
-              By design, Kahu Ola does not require persistent storage of raw precise location on central infrastructure to provide core readiness and guidance features.
-            </p>
+          <section class="policy-block">
+            <h2>2. Independent Civic Tech Disclaimer</h2>
+            <h3>Public Data Sources</h3>
+            <p>Kahu Ola aggregates publicly available data from sources including, but not limited to:</p>
+            <ul>
+              <li>NASA FIRMS (Fire Information for Resource Management System)</li>
+              <li>NOAA (National Oceanic and Atmospheric Administration)</li>
+              <li>USGS (United States Geological Survey)</li>
+              <li>Hawaii County public data feeds</li>
+            </ul>
+            <p>These data sources remain the property and responsibility of their respective agencies.</p>
+            <h3>Independent Civic Technology Project</h3>
+            <p>Kahu Ola is an independent civic technology initiative.</p>
+            <p>It is not an official government application and is not operated by NASA, FEMA, NOAA, USGS, Hawaii County, or any other governmental authority.</p>
+            <p>The application is designed to complement, not replace, existing emergency alert systems serving Maui.</p>
+            <h3>Emergency Use Disclaimer</h3>
+            <p>Satellite-derived or publicly aggregated data may contain latency, gaps, or inaccuracies.</p>
+            <p>In any emergency situation, users must always follow direct instructions and official guidance issued by:</p>
+            <ul>
+              <li>Maui Fire Department</li>
+              <li>Maui Police Department</li>
+              <li>Hawaii Emergency Management Agency</li>
+              <li>Other authorized local authorities</li>
+            </ul>
+            <p>Kahu Ola is a supplemental informational tool and should not be relied upon as the sole source of emergency direction.</p>
           </section>
 
-          <section class="doc-card">
-            <h2>Sharing</h2>
-            <p>
-              Kahu Ola does not sell personal data. Information is not shared for advertising or behavioral profiling. Limited disclosures may occur only when required to operate core support channels, comply with law, or protect the safety and rights of users and the public.
-            </p>
+          <section class="policy-block">
+            <h2>3. No Commercial Exploitation Commitment</h2>
+            <p>Kahu Ola operates under a community-first model.</p>
+            <p>We commit to the following principles:</p>
+            <ul>
+              <li>No advertising</li>
+              <li>No sale of user data</li>
+              <li>No commercial resale of personal information</li>
+            </ul>
+            <p>Kahu Ola does not monetize user data.</p>
+            <p>The platform operates using a cost-efficient, serverless architecture designed to minimize infrastructure overhead while serving the Maui community.</p>
+            <p>The project is structured as a civic-oriented initiative and is not built around behavioral tracking or data commercialization.</p>
           </section>
 
-          <section class="doc-card">
-            <h2>Retention</h2>
-            <p>
-              Kahu Ola seeks to retain the minimum information necessary for operational continuity. Where data is processed for immediate safety functions, retention is limited by design and not used to maintain a default historical log of raw precise location.
-            </p>
-          </section>
-
-          <section class="doc-card">
-            <h2>Security</h2>
-            <p>
-              Reasonable administrative, technical, and operational safeguards are used to protect the service and any associated communications. No system can be guaranteed to be perfectly secure, so users should also follow official emergency guidance and good device security practices.
-            </p>
-          </section>
-
-          <section class="doc-card">
-            <h2>Children</h2>
-            <p>
-              Kahu Ola is not designed to knowingly collect personal data from children without appropriate authorization. If you believe a child has submitted personal information improperly, contact <a href="mailto:long@kahuola.org">long@kahuola.org</a> for review.
-            </p>
-          </section>
-
-          <section class="doc-card">
-            <h2>International</h2>
-            <p>
-              Kahu Ola is a civic-tech project focused on Maui County. If the service is accessed from outside the United States, users acknowledge that information may be processed in jurisdictions where operational services are hosted or accessed, subject to applicable law.
-            </p>
-          </section>
-
-          <section class="doc-card">
+          <section class="policy-block">
             <h2>Contact</h2>
-            <p>
-              Privacy questions, legal inquiries, and review requests may be directed to <a href="mailto:long@kahuola.org">long@kahuola.org</a>.
-            </p>
+            <p>For privacy-related questions or compliance inquiries, please contact:</p>
+            <p><a href="mailto:long@kahuola.org">long@kahuola.org</a></p>
           </section>
         </div>
       </div>
     </main>
 
-    <footer class="site-footer">
-      <div class="container footer-grid">
+    <footer class="footer">
+      <div class="container footer-inner">
         <div class="footer-copy">
           <strong>Kahu Ola</strong>
           <span>Guardian of Life</span>
           <span><a href="mailto:long@kahuola.org">long@kahuola.org</a></span>
         </div>
         <div class="footer-links">
-          <a href="./index.html">Home</a>
+          <a href="./privacy.html">Privacy</a>
           <a href="./support.html">Support</a>
         </div>
       </div>
