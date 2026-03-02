@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Support | Kahu Ola</title>
-  <meta name="description" content="Support and review guidance for Kahu Ola.">
+  <meta name="description" content="Support and operational guidance for Kahu Ola.">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -36,9 +36,9 @@
       <div class="container document-grid">
         <section class="document-hero glass">
           <p class="section-label">Support</p>
-          <h1 class="document-title">Support and review guidance</h1>
+          <h1 class="document-title">Support and operational guidance</h1>
           <p class="lead">
-            Kahu Ola keeps support direct and review-friendly. For help, compliance questions, or deployment issues, contact <a href="mailto:long@kahuola.org">long@kahuola.org</a>.
+            Kahu Ola keeps support direct and review-friendly. For operational questions, compliance requests, or general help, contact <a href="mailto:long@kahuola.org">long@kahuola.org</a>.
           </p>
           <div class="meta-row document-meta">
             <span class="chip">Support contact: long@kahuola.org</span>
@@ -52,48 +52,55 @@
 
         <div class="policy-stack">
           <section class="policy-block">
-            <h2>How to get help</h2>
-            <p>Email <a href="mailto:long@kahuola.org">long@kahuola.org</a> with a short description of the issue, the page involved, and what you expected to happen.</p>
-            <p class="support-note">For urgent incidents, follow official Maui emergency guidance first.</p>
-          </section>
-
-          <section class="policy-block">
             <h2>FAQ</h2>
             <ul class="faq-list">
               <li class="faq-item">
-                <h3>Why do the module buttons say coming soon?</h3>
-                <p>The landing portal is a production-ready public front door. Interactive module actions remain intentionally disabled until each workflow is ready for safe release.</p>
+                <h3>Is Kahu Ola an official government app?</h3>
+                <p>No. Kahu Ola is an independent civic technology initiative and should be treated as a supplemental informational tool.</p>
               </li>
               <li class="faq-item">
-                <h3>Does the status board make live network calls?</h3>
-                <p>No. The landing page uses a static demo status design and computes the "Last checked" time locally in the browser without calling external services.</p>
+                <h3>Why do some module buttons remain disabled?</h3>
+                <p>The public portal shows the production roadmap, but interactive modules stay marked as coming soon until each workflow is ready for safe release.</p>
               </li>
               <li class="faq-item">
-                <h3>Is Kahu Ola an official government application?</h3>
-                <p>No. Kahu Ola is an independent civic-tech project for Maui County and should be treated as a supplemental informational tool.</p>
+                <h3>Does the landing page call government APIs directly in my browser?</h3>
+                <p>No. The public landing page uses static presentation patterns for clarity and resilience. Live browser-side calls are intentionally limited on the public homepage.</p>
               </li>
             </ul>
           </section>
 
           <section class="policy-block">
-            <h2>Troubleshooting checklist</h2>
+            <h2>Troubleshooting</h2>
             <ul class="checklist">
               <li>Refresh the page to ensure the latest static build is loaded.</li>
-              <li>Confirm that <code>./styles.css</code> is loading and that browser extensions are not blocking local assets.</li>
-              <li>Use the root production paths: <code>/</code>, <code>/privacy.html</code>, and <code>/support.html</code>.</li>
+              <li>Confirm that <code>./styles.css</code> loads and that browser extensions are not blocking local assets.</li>
+              <li>Use the root production URLs only: <code>/</code>, <code>/privacy.html</code>, and <code>/support.html</code>.</li>
               <li>If a module is labeled coming soon, that behavior is expected in the current release.</li>
             </ul>
           </section>
 
           <section class="policy-block">
-            <h2>Permissions guidance</h2>
-            <p>Location-related access should only be requested when a specific safety function needs it. The intended model is contextual access for a clear purpose, not continuous background collection.</p>
+            <h2>Permissions</h2>
+            <p><strong>Location:</strong> Location access should only be requested when a specific safety function needs it, such as shelter distance, route context, or proximity-based alerts. The intended model is contextual use rather than continuous background collection.</p>
+            <p><strong>Notifications:</strong> Notification access may be used on supported client platforms so residents can receive timely civic safety prompts. Users can disable notifications at any time in device settings.</p>
+          </section>
+
+          <section class="policy-block disclaimer-block">
+            <h2>Not Official Government App</h2>
+            <p>Kahu Ola is an independent civic technology initiative. It is not affiliated with, endorsed by, or officially connected to NASA, NOAA, USGS, FEMA, EPA, or any U.S. government agency. All referenced data is sourced through publicly available Open Data APIs.</p>
           </section>
 
           <section class="policy-block">
-            <h2>Privacy reminder</h2>
-            <p>Location data is processed via Edge Computing on the user's device (on-device) or an equivalent edge path; we do not store raw precise location on our servers by default.</p>
-            <p>This privacy posture is designed to support safety functionality while minimizing exposure of raw precise location data.</p>
+            <h2>Official sources residents should follow</h2>
+            <ul class="official-links">
+              <li><a href="https://www.weather.gov/">weather.gov (NWS)</a></li>
+              <li><a href="https://www.ready.gov/">ready.gov</a></li>
+              <li><a href="https://www.tsunami.gov/">tsunami.gov</a></li>
+              <li><a href="https://www.usgs.gov/natural-hazards">usgs.gov (hazards)</a></li>
+              <li><a href="https://www.airnow.gov/">airnow.gov</a></li>
+              <li><a href="https://www.fema.gov/">fema.gov</a></li>
+              <li><a href="https://www.mauicounty.gov/">mauicounty.gov (local guidance)</a></li>
+            </ul>
           </section>
         </div>
       </div>
