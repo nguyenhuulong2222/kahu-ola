@@ -1,0 +1,6 @@
+{
+  "alert_buddy.unable_fetch": "Hindi makuha ang mga alerto sa ngayon. Pakisubukang muli mamaya.",
+  "alert_buddy.no_alerts": "Walang aktibong babala sa panahon para sa {place}.",
+  "alert_buddy.action_check_updates": "Suriin ang mga lokal na update.",
+  "alert_buddy.action_avoid_flood": "Iwasan ang mga bahang kalsada."
+}

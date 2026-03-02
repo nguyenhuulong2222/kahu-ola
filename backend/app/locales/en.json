@@ -1,0 +1,6 @@
+{
+  "alert_buddy.unable_fetch": "Unable to fetch alerts right now.",
+  "alert_buddy.no_alerts": "No active weather alerts for {place}.",
+  "alert_buddy.action_check_updates": "Check local updates.",
+  "alert_buddy.action_avoid_flood": "Avoid flooded roads."
+}

@@ -1,0 +1,6 @@
+{
+  "alert_buddy.unable_fetch": "Hiện chưa thể lấy cảnh báo thời tiết. Vui lòng thử lại sau.",
+  "alert_buddy.no_alerts": "Hiện không có cảnh báo thời tiết nào cho {place}.",
+  "alert_buddy.action_check_updates": "Theo dõi cập nhật từ chính quyền địa phương.",
+  "alert_buddy.action_avoid_flood": "Tránh đi vào đường ngập nước."
+}

@@ -1,0 +1,6 @@
+{
+  "alert_buddy.unable_fetch": "現在、気象警報を取得できません。後でもう一度お試しください。",
+  "alert_buddy.no_alerts": "{place}では現在、有効な気象警報はありません。",
+  "alert_buddy.action_check_updates": "地域の最新情報を確認してください。",
+  "alert_buddy.action_avoid_flood": "冠水した道路を避けてください。"
+}
