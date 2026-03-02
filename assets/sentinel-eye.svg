@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="sentinel-body" x1="32" y1="17" x2="32" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1A314A"/>
+      <stop offset="1" stop-color="#0D1B2A"/>
+    </linearGradient>
+    <linearGradient id="sentinel-amber" x1="18" y1="10" x2="46" y2="42" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFD36A"/>
+      <stop offset="1" stop-color="#FFB700"/>
+    </linearGradient>
+    <radialGradient id="sentinel-pupil" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(32 13.75) rotate(90) scale(4.6 5.8)">
+      <stop offset="0" stop-color="#FFF4D3"/>
+      <stop offset="0.52" stop-color="#FFD36A"/>
+      <stop offset="1" stop-color="#FFB700"/>
+    </radialGradient>
+    <filter id="sentinel-glow" x="10" y="4" width="44" height="44" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="1.5"/>
+    </filter>
+  </defs>
+
+  <path d="M27.6 46.4L29 22.3H35L36.4 46.4L35.3 51H28.7L27.6 46.4Z" fill="url(#sentinel-body)"/>
+  <rect x="24.6" y="47.2" width="14.8" height="4.35" rx="2.18" fill="url(#sentinel-body)"/>
+  <rect x="30.55" y="16.85" width="2.9" height="3.4" rx="1.45" fill="url(#sentinel-body)"/>
+
+  <g filter="url(#sentinel-glow)" opacity="0.18">
+    <rect x="18.5" y="8.5" width="27" height="10.5" rx="5.25" fill="url(#sentinel-amber)"/>
+    <path d="M23 25C25.35 29.15 28.38 31.25 32 31.25C35.62 31.25 38.65 29.15 41 25" stroke="url(#sentinel-amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M19 28.35C22.1 34 26.42 36.95 32 36.95C37.58 36.95 41.9 34 45 28.35" stroke="url(#sentinel-amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M15 31.7C18.95 38.8 24.52 42.3 32 42.3C39.48 42.3 45.05 38.8 49 31.7" stroke="url(#sentinel-amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <rect x="18.5" y="8.5" width="27" height="10.5" rx="5.25" fill="#FFB700" fill-opacity="0.07" stroke="url(#sentinel-amber)" stroke-width="2"/>
+  <ellipse cx="32" cy="13.75" rx="4.65" ry="3.05" stroke="url(#sentinel-amber)" stroke-width="1.85"/>
+  <circle cx="32" cy="13.75" r="1.38" fill="url(#sentinel-pupil)"/>
+  <path d="M23 25C25.35 29.15 28.38 31.25 32 31.25C35.62 31.25 38.65 29.15 41 25" stroke="url(#sentinel-amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M19 28.35C22.1 34 26.42 36.95 32 36.95C37.58 36.95 41.9 34 45 28.35" stroke="url(#sentinel-amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M15 31.7C18.95 38.8 24.52 42.3 32 42.3C39.48 42.3 45.05 38.8 49 31.7" stroke="url(#sentinel-amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
