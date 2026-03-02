@@ -143,6 +143,199 @@
         </div>
       </section>
 
+      <section class="section" id="integrity">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="section-label">System Integrity</p>
+            <h2 class="section-title">Public Data Sources &amp; System Integrity</h2>
+            <p class="lead">Independent civic technology powered by publicly available U.S. Open Data.</p>
+            <p class="muted">
+              The federal hazard layer is combined with neutral processing and delivery systems for clarity and resilience. References below are informational only and are not presented as sponsorships, partnerships, or endorsements.
+            </p>
+          </div>
+
+          <div class="integrity-note surface reveal">
+            <p>
+              Kahu Ola uses multi-source validation across public-domain feeds, near-real-time ingestion where supported, and on-device edge processing for location-sensitive functions. The platform is a supplemental civic tool and is not a replacement for official emergency directives from Maui County or other authorized agencies.
+            </p>
+          </div>
+
+          <div class="sources-layout section-head">
+            <section class="source-category surface reveal" aria-labelledby="federal-sensors-title">
+              <p class="section-label">Category 1</p>
+              <h3 id="federal-sensors-title">Federal Natural Hazard Sensors</h3>
+              <p>Public U.S. hazard and environmental feeds used for situational awareness and validation.</p>
+              <div class="source-list">
+                <article class="source-card">
+                  <span class="source-badge">NASA FIRMS - Public Data</span>
+                  <h4>NASA FIRMS (Public Open Data)</h4>
+                  <p class="source-source">Source: <a href="https://firms.modaps.eosdis.nasa.gov/">firms.modaps.eosdis.nasa.gov</a></p>
+                  <div class="source-meta">
+                    <p><strong>Role:</strong> Satellite-derived thermal anomaly detection for early wildfire situational awareness.</p>
+                    <p><strong>Community Impact:</strong> Enables earlier awareness before ground-level reports reach Maui residents.</p>
+                  </div>
+                </article>
+                <article class="source-card">
+                  <span class="source-badge">NOAA Forecast - Public Data</span>
+                  <h4>NOAA Weather.gov Forecast API (Public Open Data)</h4>
+                  <p class="source-source">Source: <a href="https://www.weather.gov/documentation/services-web-api">api.weather.gov</a></p>
+                  <div class="source-meta">
+                    <p><strong>Role:</strong> Forecast and gridpoint weather context for wind, humidity, and changing local conditions.</p>
+                    <p><strong>Community Impact:</strong> Helps Maui households judge fast-moving weather risk before travel or evacuation.</p>
+                  </div>
+                </article>
+                <article class="source-card">
+                  <span class="source-badge">NOAA Alerts - Public Data</span>
+                  <h4>NOAA Weather.gov Alerts API (Public Open Data)</h4>
+                  <p class="source-source">Source: <a href="https://api.weather.gov/openapi.json">api.weather.gov/openapi.json</a></p>
+                  <div class="source-meta">
+                    <p><strong>Role:</strong> Public alert bulletin ingestion for watches, warnings, and active hazard statements.</p>
+                    <p><strong>Community Impact:</strong> Keeps public-facing summaries aligned with official alert timing.</p>
+                  </div>
+                </article>
+                <article class="source-card">
+                  <span class="source-badge">NOAA Tides - Public Data</span>
+                  <h4>NOAA Tides &amp; Currents API (Public Open Data)</h4>
+                  <p class="source-source">Source: <a href="https://api.tidesandcurrents.noaa.gov/api/prod/">api.tidesandcurrents.noaa.gov</a></p>
+                  <div class="source-meta">
+                    <p><strong>Role:</strong> Coastal water level and tide reference for shoreline and harbor conditions.</p>
+                    <p><strong>Community Impact:</strong> Supports safer planning for coastal communities, harbor users, and low-lying areas.</p>
+                  </div>
+                </article>
+                <article class="source-card">
+                  <span class="source-badge">USGS Seismic - Public Data</span>
+                  <h4>USGS Earthquake Hazards API (Public Open Data)</h4>
+                  <p class="source-source">Source: <a href="https://earthquake.usgs.gov/fdsnws/event/1/">earthquake.usgs.gov</a></p>
+                  <div class="source-meta">
+                    <p><strong>Role:</strong> Seismic event reference and aftershock context for regional hazard awareness.</p>
+                    <p><strong>Community Impact:</strong> Adds another trusted signal when Maui residents need rapid event context.</p>
+                  </div>
+                </article>
+                <article class="source-card">
+                  <span class="source-badge">USGS Water - Public Data</span>
+                  <h4>USGS Water Services API (Public Open Data)</h4>
+                  <p class="source-source">Source: <a href="https://waterservices.usgs.gov/">waterservices.usgs.gov</a></p>
+                  <div class="source-meta">
+                    <p><strong>Role:</strong> Streamflow and water-monitoring references for water-related disruption scenarios.</p>
+                    <p><strong>Community Impact:</strong> Helps residents understand changing water conditions during severe events.</p>
+                  </div>
+                </article>
+                <article class="source-card">
+                  <span class="source-badge">FEMA Recovery - Public Data</span>
+                  <h4>FEMA OpenFEMA API (Public Open Data)</h4>
+                  <p class="source-source">Source: <a href="https://www.fema.gov/about/openfema/api">fema.gov/about/openfema/api</a></p>
+                  <div class="source-meta">
+                    <p><strong>Role:</strong> Disaster declarations and recovery-reference data for post-event workflows.</p>
+                    <p><strong>Community Impact:</strong> Gives Maui residents clearer access to recovery context after major incidents.</p>
+                  </div>
+                </article>
+                <article class="source-card">
+                  <span class="source-badge">EPA Air - Public Data</span>
+                  <h4>EPA AirNow API (Public Open Data)</h4>
+                  <p class="source-source">Source: <a href="https://docs.airnowapi.org/">docs.airnowapi.org</a></p>
+                  <div class="source-meta">
+                    <p><strong>Role:</strong> Air quality and smoke exposure reference data for health-aware decision support.</p>
+                    <p><strong>Community Impact:</strong> Helps Maui residents make safer choices about masks, sheltering, and outdoor activity.</p>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section class="source-category surface reveal" aria-labelledby="ai-language-title">
+              <p class="section-label">Category 2</p>
+              <h3 id="ai-language-title">AI &amp; Language Processing</h3>
+              <p>Neutral language and safety systems used to turn technical inputs into clearer explanations.</p>
+              <div class="source-list">
+                <article class="source-card">
+                  <span class="source-badge">OpenAI - Operational AI</span>
+                  <h4>OpenAI Responses API</h4>
+                  <p class="source-source">Source: <a href="https://platform.openai.com/docs/api-reference/responses">platform.openai.com</a></p>
+                  <div class="source-meta">
+                    <p><strong>Role:</strong> Structured plain-language summaries that translate raw signal feeds into readable civic guidance.</p>
+                    <p><strong>Community Impact:</strong> Makes complex data easier for Maui residents to understand quickly.</p>
+                  </div>
+                </article>
+                <article class="source-card">
+                  <span class="source-badge">OpenAI - Safety Filter</span>
+                  <h4>OpenAI Moderations API</h4>
+                  <p class="source-source">Source: <a href="https://platform.openai.com/docs/api-reference/moderations">platform.openai.com</a></p>
+                  <div class="source-meta">
+                    <p><strong>Role:</strong> Safety screening for community-submitted text or operator-generated content.</p>
+                    <p><strong>Community Impact:</strong> Reduces the chance of harmful, misleading, or unsafe language in shared updates.</p>
+                  </div>
+                </article>
+                <article class="source-card">
+                  <span class="source-badge">OpenAI - Semantic Matching</span>
+                  <h4>OpenAI Embeddings API</h4>
+                  <p class="source-source">Source: <a href="https://platform.openai.com/docs/api-reference/embeddings">platform.openai.com</a></p>
+                  <div class="source-meta">
+                    <p><strong>Role:</strong> Semantic matching across advisories, reports, and repeated public notices.</p>
+                    <p><strong>Community Impact:</strong> Helps reduce duplicate noise and keeps critical updates more coherent.</p>
+                  </div>
+                </article>
+                <article class="source-card">
+                  <span class="source-badge">Apple - On-Device NLP</span>
+                  <h4>Apple Natural Language Framework</h4>
+                  <p class="source-source">Source: <a href="https://developer.apple.com/documentation/naturallanguage">developer.apple.com</a></p>
+                  <div class="source-meta">
+                    <p><strong>Role:</strong> On-device language parsing and normalization where supported on Apple platforms.</p>
+                    <p><strong>Community Impact:</strong> Keeps sensitive text processing closer to the device while improving readability.</p>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section class="source-category surface reveal" aria-labelledby="delivery-systems-title">
+              <p class="section-label">Category 3</p>
+              <h3 id="delivery-systems-title">Infrastructure &amp; Delivery Systems</h3>
+              <p>Distribution and reliability layers that move public information to the web and supported client surfaces.</p>
+              <div class="source-list">
+                <article class="source-card">
+                  <span class="source-badge">Firebase - Delivery</span>
+                  <h4>Firebase Cloud Messaging</h4>
+                  <p class="source-source">Source: <a href="https://firebase.google.com/docs/cloud-messaging">firebase.google.com</a></p>
+                  <div class="source-meta">
+                    <p><strong>Role:</strong> Push-notification delivery for supported client applications.</p>
+                    <p><strong>Community Impact:</strong> Speeds delivery of urgent safety prompts when fast notice matters.</p>
+                  </div>
+                </article>
+                <article class="source-card">
+                  <span class="source-badge">Slack - Operations</span>
+                  <h4>Slack Incoming Webhooks</h4>
+                  <p class="source-source">Source: <a href="https://api.slack.com/messaging/webhooks">api.slack.com</a></p>
+                  <div class="source-meta">
+                    <p><strong>Role:</strong> Maintainer-side operational routing for system checks and signal escalation.</p>
+                    <p><strong>Community Impact:</strong> Supports faster human review when conditions shift quickly.</p>
+                  </div>
+                </article>
+                <article class="source-card">
+                  <span class="source-badge">GitHub Pages - Web Delivery</span>
+                  <h4>GitHub Pages</h4>
+                  <p class="source-source">Source: <a href="https://docs.github.com/en/pages">docs.github.com</a></p>
+                  <div class="source-meta">
+                    <p><strong>Role:</strong> Static delivery layer for the public information portal at kahuola.org.</p>
+                    <p><strong>Community Impact:</strong> Keeps the public web layer lightweight, resilient, and easy to access.</p>
+                  </div>
+                </article>
+                <article class="source-card">
+                  <span class="source-badge">Apple Maps - Interface</span>
+                  <h4>MapKit JS</h4>
+                  <p class="source-source">Source: <a href="https://developer.apple.com/documentation/mapkitjs">developer.apple.com</a></p>
+                  <div class="source-meta">
+                    <p><strong>Role:</strong> Mapping surfaces for shelter, route, and location context on supported clients.</p>
+                    <p><strong>Community Impact:</strong> Helps Maui residents interpret place-based safety information faster.</p>
+                  </div>
+                </article>
+              </div>
+            </section>
+          </div>
+
+          <div class="disclaimer-block reveal">
+            <p>Kahu Ola is an independent civic technology initiative. It is not affiliated with, endorsed by, or officially connected to NASA, NOAA, USGS, FEMA, EPA, or any U.S. government agency. All referenced data is sourced through publicly available Open Data APIs.</p>
+          </div>
+        </div>
+      </section>
+
       <section class="section" id="modules">
         <div class="container">
           <div class="section-head reveal">
@@ -419,6 +612,7 @@
           <a href="./privacy.html">Privacy</a>
           <a href="./support.html">Support</a>
         </div>
+        <p class="footer-legal">Kahu Ola is an independent civic technology initiative. It is not affiliated with, endorsed by, or officially connected to NASA, NOAA, USGS, FEMA, EPA, or any U.S. government agency. All referenced data is sourced through publicly available Open Data APIs.</p>
       </div>
     </footer>
   </div>
