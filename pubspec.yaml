@@ -2,7 +2,7 @@ name: kahu_ola
 description: "Kahu Ola - Guardian of Life. Real-Time Geospatial Safety Dashboard for Hawaii."
 publish_to: 'none'
 
-version: 1.0.0+10
+version: 1.0.0+11
 
 environment:
   sdk: ">=3.11.0 <4.0.0"
